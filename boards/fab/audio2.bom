@@ -1,0 +1,49 @@
+# PcbBOM Version 1.0
+# Date: Fri 14 Aug 2020 03:10:27 GMT UTC
+# Author: harold
+# Title: (unknown) - PCB BOM
+# Quantity, Description, Value, RefDes
+# --------------------------------------------
+2,"0805","4.7uF",C22 C13 
+1,"SPDT_SMD_MSK_12C02_2","MSK_12C02_smd_spdt_switch",S1 
+5,"0805","100",R1 R2 R10 R9 R8 
+1,"SOT23","MMUN2213",Q2 
+2,"HEADER4_3","SIP_4_way",J2 J1 
+1,"MICROSD_1","uSD_socket",U11 
+3,"0805","2k2",R14 R16 R15 
+3,"0805","47k",R13 R12 R17 
+1,"SOT23","BSS84",Q4 
+8,"0805","1uF",C5 C14 C18 C4 C3 C23 C20 C17 
+1,"0805","3k3",R6 
+3,"SOT23","XC6206",U4 U8 U9 
+1,"0805","1k",R5 
+1,"0805","8k2",R3 
+1,"CD54_1","22uH",L1 
+1,"0805","1k8",R7 
+2,"1206","22uF",C2 C1 
+1,"SOT26","SX1308",U1 
+1,"SOT23","Si2301",Q3 
+4,"0805","FB",L3 L5 L4 L2 
+1,"XTAL_3225_1","24.576MHz",U2 
+1,"TSSOP14","PCM1808",U3 
+1,"SOT26","74LVC1G3157",U12 
+3,"0805","0.1uF",C10 C8 C6 
+1,"LQFP48_7_2","STM32F051C8T6",U6 
+1,"USB_CHARGE_BMS_MOD_2","USB_charger",U5 
+1,"HEADER10_3","unknown",J8 
+1,"HEADER5_3","SIP_5_way",J4 
+1,"JST_XH_2","JST_XH2_header",J6 
+1,"HC49_3","8MHz",U10 
+2,"0805","100n",C25 C24 
+1,"0805","10n",C15 
+3,"0805","10k",R20 R19 R4 
+2,"HEADER3_1","unknown",J3 J7 
+1,"LED_0603_1","yellow",LED3 
+1,"LED_0603_1","red",LED1 
+4,"0805","18p",C12 C16 C19 C21 
+1,"XTAL32KHZ_1","32768Hz",U7 
+1,"HEADER2_1","unknown",J5 
+2,"SOD323_2","2N5819",D1 D2 
+1,"0805","100nF",C26 
+3,"0805","10uF",C9 C11 C7 
+1,"LED_0603_1","green",LED2 

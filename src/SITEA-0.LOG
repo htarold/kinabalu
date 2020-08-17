@@ -1,0 +1,51 @@
+# This is an example config/log file for the audio recorder, to
+# be placed in the top level directory ("folder") of the SD card.
+# This file must be named according to this format:
+#<sitename>-0.LOG
+# where <sitename> is up to 5 characters.  The "-0" part is
+# required for a feature yet to be written.  The ".LOG" part is
+# obligatory, and all characters MUST be ASCII upper case.
+#
+# You should also note the deployer's name, microphone array
+# type and orientation, and any other relevant info to this file.
+#
+# In addition, whenever the recorder starts up, it will automatically
+# record for 20 seconds, before proceeding to record according
+# to the specified schedule.  This is to allow the deployer to
+# make a voice recording detailing last minute details of the
+# installation.
+#
+# The first part of this file consists of configuration
+# directives.  3 directives are recognised:
+#
+# sync 2019 jun 20 14:23:30 thu
+# says to set the real time clock to this date/time, when the recorder
+# is run.  Note capitalisation.  This directive is optional, but
+# the recorder will fail if the RTC is not already initialised.
+# 
+#record sun-sat 0-23:0-59/2 90
+#
+# This says to record every day (Sunday to Saturday), every hour
+# (0-23) and every OTHER minute (0-59/2) for 90 seconds.
+# 
+# record jan-mar,jul 1-11/2,31 0-23/4:0 120
+# Multiple record directive may appear.  The first matching one is
+# used.  The form above specifies the day by calendar date rather
+# than day of week.  The recorder will record every January,
+# February, March, and July, the first to 11th days (inclusive),
+# and the 31st (not February, which doesn't have a 31st), at the
+# top of every 4th hour (midnight, 4am, 8am, noon, 4pm, 8pm) for 2
+# minutes.
+# 
+# Just before and after a recording, sensor data are
+# read and the results are logged (in this file).  This occurs even if
+# the recording duration is 0 (when no audio recording is performed).
+# 
+#end
+# The last directive must be end.  The recorder will append
+# diagnostics etc. to the file after the end directive.
+#
+# Following is a configuration suitable for testing:
+#ync 2019 may 20 15:25 mon
+record sun-sat 0-23:0-59/2 90
+end

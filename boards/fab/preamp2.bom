@@ -1,0 +1,16 @@
+# PcbBOM Version 1.0
+# Date: Sat 08 Aug 2020 01:25:31 GMT UTC
+# Author: harold
+# Title: (unknown) - PCB BOM
+# Quantity, Description, Value, RefDes
+# --------------------------------------------
+2,"SO8","MC4558",U3 U2 
+4,"0805","120pF",C5 C14 C11 C2 
+4,"0805","8k2",R6 R16 R13 R3 
+4,"0805","82k",R5 R15 R12 R2 
+12,"0805","1uF",C1 C3 C15 C12 C4 C8 C17 C16 C18 C13 C19 C6 
+4,"0805","2M2",R4 R14 R1 R11 
+1,"HEADER6_2","unknown",J1 
+4,"0805","2k2",R7 R8 R9 R10 
+3,"0805","10uF",C9 C7 C10 
+2,"JST_XH_2","unknown",U1 U4 
