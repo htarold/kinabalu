@@ -1,5 +1,6 @@
 # This is an example config/log file for the audio recorder, to
-# be placed in the top level directory ("folder") of the SD card.
+# be placed in the top level directory ("folder") of the SD
+# card, which must be FAT32 formatted.
 # This file must be named according to this format:
 #<sitename>-0.LOG
 # where <sitename> is up to 5 characters.  The "-0" part is
@@ -9,41 +10,115 @@
 # You should also note the deployer's name, microphone array
 # type and orientation, and any other relevant info to this file.
 #
-# In addition, whenever the recorder starts up, it will automatically
+# This file also serves as the operations guide, since it will
+# always be accessible when the recorder is to be used.
+#
+# Whenever the recorder starts up, it will automatically
 # record for 20 seconds, before proceeding to record according
 # to the specified schedule.  This is to allow the deployer to
 # make a voice recording detailing last minute details of the
 # installation.
 #
 # The first part of this file consists of configuration
-# directives.  3 directives are recognised:
+# directives.  3 directives are recognised, the first is sync:
 #
-# sync 2019 jun 20 14:23:30 thu
-# says to set the real time clock to this date/time, when the recorder
-# is run.  Note capitalisation.  This directive is optional, but
-# the recorder will fail if the RTC is not already initialised.
+#sync 2019 jun 20 14:23:30 thu
+#
+# The above sync directive says to set the real time clock to this
+# date/time, when the recorder is turned on.  Note the capitalisation.
+# This directive is optional, but time on the real time clock (RTC)
+# of the recorder must be initialised or the recorder will not run.
+#
+# It should be obvious now that every line starting with a "#"
+# mark is a comment, and will not be interpreted as a directive.
+# After a sync directive is executed, the "s" of "sync" will be
+# replaced by a "#", so the directive will be executed only
+# once.
+#
+# The attention LED (yellow) on the recorder board will turn on
+# whenever the firmware enters a critical section of code, and
+# will turn off when it clears that critical section, usually
+# within a couple of seconds.  If it remains on indefinitely,
+# something is wrong.  See later in this file for
+# troubleshooting.  When deploying, it is enough to verify
+# that the yellow attention LED goes off to confirm the recorder
+# is operating properly.
 # 
 #record sun-sat 0-23:0-59/2 90
 #
-# This says to record every day (Sunday to Saturday), every hour
+# record directives are the way to schedule recordings, and
+# there may be up to 6 of them.  The above record directive
+# says to record every day (Sunday to Saturday), every hour
 # (0-23) and every OTHER minute (0-59/2) for 90 seconds.
 # 
-# record jan-mar,jul 1-11/2,31 0-23/4:0 120
-# Multiple record directive may appear.  The first matching one is
-# used.  The form above specifies the day by calendar date rather
-# than day of week.  The recorder will record every January,
-# February, March, and July, the first to 11th days (inclusive),
-# and the 31st (not February, which doesn't have a 31st), at the
-# top of every 4th hour (midnight, 4am, 8am, noon, 4pm, 8pm) for 2
-# minutes.
+#record jan-mar,jul 1-11/2,31 0-23/4:0 120
+#
+# A record directive can be more complicated.  Instead of
+# specifying the day of week, you can specify the month and day
+# of month.  In the above, the month is specified as a range
+# "jan-mar" and singly "jul", and these two are combined as a
+# list using "," (the comma).
+#
+# As multiple record directive may appear, the first one that matches
+# the current day and time is used.  Given the directive above,
+# the recorder will record every January, February, March, and July,
+# the first to 11th days (inclusive), and the 31st of those months
+# (but not February, which doesn't have a 31st), at the top of every
+# 4th hour starting from midnight (i.e. midnight, 4am, 8am, noon,
+# 4pm, 8pm only) of those days, for 2 minutes.
 # 
 # Just before and after a recording, sensor data are
-# read and the results are logged (in this file).  This occurs even if
+# read and the results are logged (to this file).  This occurs even if
 # the recording duration is 0 (when no audio recording is performed).
 # 
 #end
 # The last directive must be end.  The recorder will append
-# diagnostics etc. to the file after the end directive.
+# diagnostics and sensor data to the file after the end
+# directive, which you can review after retrieving the recorder
+# to verify its proper operation.
+#
+# Troubleshooting:
+# Apart from the yellow attention LED, the green LED indicates
+# SD card access, and the red one indicates diagnostics output.
+# When sleeping between recordings, none of the LEDs will be on
+# (but the green LED may glow faintly; this is unimportant).
+# When recording, the green LED will be decidedly on, and the
+# red LED will flicker occasionally to indicate diagnostic
+# output is available.  Yellow may flicker occasionally.  This
+# is the normal behaviour of the recorder.
+#
+# In the field it may not be possible to do detailed
+# troubleshooting; then if the yellow LED remains on, it is
+# sufficient to take note of the other LEDs and retrieve the
+# recorder to troubleshoot later.
+#
+# After verifying the recorder is set up correctly, connect the
+# USB-to-serial adaptor between the laptop and the recorder, set
+# the serial parameters to 57600 bps, 8 bits, 1 stop bit, no parity
+# (i.e. 8n1) in your terminal emulator (such as putty).  Reboot or
+# power on the recorder and watch the diagnostics on your screen.
+# The diagnostics will indicate the problem, such as uninitialised
+# RTC time or missing SD card, which you should then rectify.
+#
+# You should always test a configuration file before deploying
+# the unit.  The first test is for syntax errors.  Simply boot
+# up with the configuration file while watching the diagnostics.
+# If there is a syntax error (like a misspelled directive), the
+# diagnostics will indicate this.  If it passes this test, wait
+# for the diagnostics to print a schedule table, which indicates
+# when it will wake up to record.  You should check this table
+# to verify the unit's understanding of your intent.
+#
+# Tips on Deployment:
+# The recorder should be deployed with the microphones (which
+# are omnidirectional) pointing downwards, to prevent rain
+# entry.  Care should be taken that the recorder enclosure
+# and its contents do not rattle.  The recorder should not be
+# deployed where it will be in direct sun, as this will affect
+# the temperature readings.  It is best to avoid powering off
+# the recorder when the SD card is in use (green LED is on), as
+# this can cause the card to be corrupted.  You should run
+# chkdsk or similar to be sure.
 #
 # Following is a configuration suitable for testing:
 #ync 2019 may 20 15:25 mon
